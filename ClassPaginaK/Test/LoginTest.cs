@@ -112,15 +112,49 @@ namespace ClassPaginaK.Test
 
 
             cuartoLi.Click();
-
+            Console.WriteLine("Click korber one report");
             Thread.Sleep(3000);
 
             WebDriverWait waitseleccion2 = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            IWebElement SegundoLi = waitseleccion4.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("ul li:nth-of-type(2)")));
+            IWebElement SegundoLi = waitseleccion4.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("nav#menu ul li ul li:nth-of-type(2)")));
             SegundoLi.Click();
-
+            Console.WriteLine("Click Crear informe");
             Thread.Sleep(3000);
 
+
+            IReadOnlyCollection<IWebElement> Select = driver.FindElements(By.TagName("select"));
+            List<IWebElement> listaSelect = new List<IWebElement>(Select);
+
+            if (Select.Count >= 1)
+            {
+                Thread.Sleep(3000);
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+                IWebElement dropdown = wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("span.k-dropdown-wrap.k-state-default:nth-of-type(1)")));
+                dropdown.Click();
+                Console.WriteLine("Click primer select");
+                Thread.Sleep(2000);
+                IWebElement option = wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div li[data-offset-index='13']")));
+                option.Click();
+                Console.WriteLine("Click seleccionar contenido select 1");
+                Thread.Sleep(3000);
+                WebDriverWait waitSelect2 = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+                IWebElement dropdownSelect2 = waitSelect2.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("span.k-dropdown-wrap.k-state-default:nth-of-type(2)")));
+                dropdownSelect2.Click();
+                Console.WriteLine("Click Segundo select");
+                Thread.Sleep(2000);
+                IWebElement optionSelect2 = waitSelect2.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div li[data-offset-index='6']")));
+                optionSelect2.Click();
+                Console.WriteLine("Click seleccionar contenido select 2");
+
+
+
+
+
+            }
+
+            WebDriverWait waitEjecutar = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            IWebElement ejecutar = waitEjecutar.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div[data-hj-test-id='page-actions'] ul li:nth-of-type(2)")));
+            ejecutar.Click();
         }
 
     }
