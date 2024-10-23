@@ -137,14 +137,16 @@ namespace ClassPaginaK.Test
                 option.Click();
                 Console.WriteLine("Click seleccionar contenido select 1");
                 Thread.Sleep(3000);
-                WebDriverWait waitSelect2 = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-                IWebElement dropdownSelect2 = waitSelect2.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("span.k-dropdown-wrap.k-state-default:nth-of-type(2)")));
+                WebDriverWait waitSelect2 = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+
+
+                IWebElement dropdownSelect2 = waitSelect2.Until(ExpectedConditions.ElementIsVisible(By.XPath("(//span[contains(@class, 'k-dropdown-wrap')])[2]")));
                 dropdownSelect2.Click();
                 Console.WriteLine("Click Segundo select");
                 Thread.Sleep(2000);
-                IWebElement optionSelect2 = waitSelect2.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div li[data-offset-index='6']")));
-                optionSelect2.Click();
-                Console.WriteLine("Click seleccionar contenido select 2");
+
+                //optionElement.Click();
+                //Console.WriteLine("Click seleccionar contenido select 2");
 
 
 
@@ -155,6 +157,54 @@ namespace ClassPaginaK.Test
             WebDriverWait waitEjecutar = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             IWebElement ejecutar = waitEjecutar.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div[data-hj-test-id='page-actions'] ul li:nth-of-type(2)")));
             ejecutar.Click();
+            Thread.Sleep(2000);
+
+            IReadOnlyCollection<IWebElement> inputsmodal = driver.FindElements(By.TagName("input"));
+            List<IWebElement> listaInputmodal = new List<IWebElement>(inputsmodal);
+
+            if (listaInputmodal.Count >= 2)
+            {
+                IWebElement PrimerInputModal = listaInputmodal[3];
+                PrimerInputModal.SendKeys("K2");
+                Thread.Sleep(2000);
+            }
+            else
+            {
+                Console.WriteLine("No se encontraron suficientes elementos input en la página.");
+            }
+
+
+
+            IReadOnlyCollection<IWebElement> ButtonModal = driver.FindElements(By.TagName("Button"));
+            List<IWebElement> listaButtonModal = new List<IWebElement>(ButtonModal);
+
+            if (listaButtonModal.Count >= 2)
+            {
+                IWebElement ButtonModalEjecutar= listaButtonModal[3];
+                ButtonModalEjecutar.Click();
+                Thread.Sleep(2000);
+            }
+            else
+            {
+                Console.WriteLine("No se encontraron suficientes elementos input en la página.");
+            }
+
+
+            WebDriverWait waitrefresh = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            IWebElement iconElement = waitrefresh.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("i.icon-without-text.fa.fa-fw.fa-refresh")));
+
+
+
+            while (true)
+            {
+                // Hacer clic en el elemento
+                iconElement.Click();
+                Console.WriteLine("Click realizado en: " + DateTime.Now);
+
+                // Esperar 10 segundos
+                Thread.Sleep(10000);
+            }
+
         }
 
     }
