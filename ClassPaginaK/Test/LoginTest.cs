@@ -157,6 +157,7 @@ namespace ClassPaginaK.Test
             WebDriverWait waitEjecutar = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             IWebElement ejecutar = waitEjecutar.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div[data-hj-test-id='page-actions'] ul li:nth-of-type(2)")));
             ejecutar.Click();
+            Console.WriteLine("Click en Ejecutar");
             Thread.Sleep(2000);
 
             IReadOnlyCollection<IWebElement> inputsmodal = driver.FindElements(By.TagName("input"));
@@ -166,6 +167,7 @@ namespace ClassPaginaK.Test
             {
                 IWebElement PrimerInputModal = listaInputmodal[3];
                 PrimerInputModal.SendKeys("K2");
+                Console.WriteLine("ingreso de texto en modal");
                 Thread.Sleep(2000);
             }
             else
@@ -182,6 +184,7 @@ namespace ClassPaginaK.Test
             {
                 IWebElement ButtonModalEjecutar= listaButtonModal[3];
                 ButtonModalEjecutar.Click();
+                Console.WriteLine("Click boton ejecutar");
                 Thread.Sleep(2000);
             }
             else
@@ -199,7 +202,7 @@ namespace ClassPaginaK.Test
             {
                 // Hacer clic en el elemento
                 iconElement.Click();
-                Console.WriteLine("Click realizado en: " + DateTime.Now);
+                Console.WriteLine("Click realizado en actualizar: " + DateTime.Now);
 
                 // Esperar 10 segundos
                 Thread.Sleep(10000);
