@@ -18,6 +18,8 @@ namespace ClassPaginaK.Test
             ChromeOptions options = new ChromeOptions();
             options.AddArgument("--start-maximized");
             options.AddExcludedArgument("enable-automation");
+            options.AddUserProfilePreference("credentials_enable_service", false);
+            options.AddUserProfilePreference("profile.password_manager_enabled", false);
 
 
             IWebDriver driver = new ChromeDriver(options);
@@ -191,10 +193,10 @@ namespace ClassPaginaK.Test
             IWebElement buttonElement = waitrefresh.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div.ToolbarRefresh.WidgetSet")));
             buttonElement.Click();
             Thread.Sleep(2000);
-            //IWebElement divElement = waitrefresh.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div[id='ReportViewerControl_ctl09']")));
-
+            IWebElement divElement = waitrefresh.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div[id='VisibleReportContentReportViewerControl_ctl09']")));
+            js.ExecuteScript("window.scrollBy(0,1000)");
             //js.ExecuteScript("arguments[0].scrollTop = arguments[0].scrollHeight;", divElement);
-
+          
 
             while (true)
             {
@@ -202,6 +204,9 @@ namespace ClassPaginaK.Test
                 //Thread.Sleep(8000);
                 Console.WriteLine("Click realizado en actualizar: " + DateTime.Now);
             
+                Thread.Sleep(10000);
+                //IWebElement divElement = waitrefresh.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div[id='ReportViewerControl_ctl09']")));
+                js.ExecuteScript("arguments[0].scrollIntoView();", divElement);
                 Thread.Sleep(10000);
             }
 
