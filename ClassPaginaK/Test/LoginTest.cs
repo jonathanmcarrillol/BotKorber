@@ -23,6 +23,8 @@ namespace ClassPaginaK.Test
             IWebDriver driver = new ChromeDriver(options);
             driver.Navigate().GoToUrl("https://emc3plprodweb.koerbercloud.com/core/Default.html");
             Thread.Sleep(3000);
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("document.body.style.zoom='80%'");
 
             //IReadOnlyCollection<IWebElement> Select = driver.FindElements(By.TagName("select"));
             //List<IWebElement> listaSelect = new List<IWebElement>(Select);
@@ -92,36 +94,22 @@ namespace ClassPaginaK.Test
             Thread.Sleep(20000);
             Console.WriteLine("fin 20 sg");
 
-            // Esperar a que el documento esté completamente cargado
             WebDriverWait waitmenu = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
             waitmenu.Until(ExpectedConditions.ElementIsVisible(By.Id("menuButtonToggle")));
-            // Ahora puedes seguir interactuando con otros elementos
             IWebElement elemento = driver.FindElement(By.Id("menuButtonToggle"));
             elemento.Click();
-     //WebDriverWait waitmenu = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            //IWebElement optionmenu = waitmenu.Until(ExpectedConditions.ElementIsVisible(By.Id("menuButtonToggle")));
-            //optionmenu.Click();
             Console.WriteLine("Click button menu");
-
             Thread.Sleep(3000);
-
-
             WebDriverWait waitseleccion4 = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-
             IWebElement cuartoLi = waitseleccion4.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("nav#menu ul li:nth-of-type(5)")));
-
-
             cuartoLi.Click();
             Console.WriteLine("Click korber one report");
             Thread.Sleep(3000);
-
             WebDriverWait waitseleccion2 = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             IWebElement SegundoLi = waitseleccion4.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("nav#menu ul li ul li:nth-of-type(2)")));
             SegundoLi.Click();
             Console.WriteLine("Click Crear informe");
             Thread.Sleep(3000);
-
-
             IReadOnlyCollection<IWebElement> Select = driver.FindElements(By.TagName("select"));
             List<IWebElement> listaSelect = new List<IWebElement>(Select);
 
@@ -138,19 +126,15 @@ namespace ClassPaginaK.Test
                 Console.WriteLine("Click seleccionar contenido select 1");
                 Thread.Sleep(3000);
                 WebDriverWait waitSelect2 = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-
-
                 IWebElement dropdownSelect2 = waitSelect2.Until(ExpectedConditions.ElementIsVisible(By.XPath("(//span[contains(@class, 'k-dropdown-wrap')])[2]")));
-                dropdownSelect2.Click();
+                SelectElement select = new SelectElement(listaSelect[1]);
+                dropdownSelect2.Click();                                                                                              
                 Console.WriteLine("Click Segundo select");
                 Thread.Sleep(2000);
-
-                //optionElement.Click();
-                //Console.WriteLine("Click seleccionar contenido select 2");
-
-
-
-
+                IWebElement fifthOption = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//li[contains(text(),'OP_Yard')]")));
+                fifthOption.Click();
+                Console.WriteLine("Click seleccionar contenido select 1");
+                Thread.Sleep(3000);
 
             }
 
@@ -166,7 +150,7 @@ namespace ClassPaginaK.Test
             if (listaInputmodal.Count >= 2)
             {
                 IWebElement PrimerInputModal = listaInputmodal[3];
-                PrimerInputModal.SendKeys("K2");
+                PrimerInputModal.SendKeys("H1");
                 Console.WriteLine("ingreso de texto en modal");
                 Thread.Sleep(2000);
             }
@@ -194,17 +178,27 @@ namespace ClassPaginaK.Test
 
 
             WebDriverWait waitrefresh = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            IWebElement iconElement = waitrefresh.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("i.icon-without-text.fa.fa-fw.fa-refresh")));
+            IWebElement iframeElement = waitrefresh.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("iframe[id='_divId2']")));
+            driver.SwitchTo().Frame(iframeElement);
+
+            // Esperar a que el botón dentro del iframe esté presente
+            IWebElement buttonElement = waitrefresh.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div.ToolbarRefresh.WidgetSet")));
+
+            // Hacer clic en el botón
+            buttonElement.Click();
 
 
 
+            IWebElement spanElement = waitrefresh.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div.ToolbarRefresh.WidgetSet")));
+
+            spanElement.Click();
+
+            //IWebElement iconElement = waitrefresh.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("i.icon-without-text.fa.fa-fw.fa-refresh")));
+            //iconElement.Click();
             while (true)
             {
-                // Hacer clic en el elemento
-                iconElement.Click();
+                spanElement.Click();
                 Console.WriteLine("Click realizado en actualizar: " + DateTime.Now);
-
-                // Esperar 10 segundos
                 Thread.Sleep(10000);
             }
 
