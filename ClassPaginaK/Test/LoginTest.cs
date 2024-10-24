@@ -26,7 +26,7 @@ namespace ClassPaginaK.Test
             driver.Navigate().GoToUrl("https://emc3plprodweb.koerbercloud.com/core/Default.html");
             Thread.Sleep(3000);
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-            js.ExecuteScript("document.body.style.zoom='80%'");
+            //js.ExecuteScript("document.body.style.zoom='80%'");
             Thread.Sleep(2000);
             //IReadOnlyCollection<IWebElement> Select = driver.FindElements(By.TagName("select"));
             //List<IWebElement> listaSelect = new List<IWebElement>(Select);
@@ -193,21 +193,30 @@ namespace ClassPaginaK.Test
             IWebElement buttonElement = waitrefresh.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div.ToolbarRefresh.WidgetSet")));
             buttonElement.Click();
             Thread.Sleep(2000);
-            IWebElement divElement = waitrefresh.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div[id='VisibleReportContentReportViewerControl_ctl09']")));
-            js.ExecuteScript("window.scrollBy(0,1000)");
+            //IWebElement divElement = waitrefresh.Until(ExpectedConditions.ElementIsVisible(By.Id("a1r_report_viewer_2']")));
             //js.ExecuteScript("arguments[0].scrollTop = arguments[0].scrollHeight;", divElement);
-          
+            Thread.Sleep(10000);
+
 
             while (true)
             {
+
+                IWebElement divElement = waitrefresh.Until(ExpectedConditions.ElementIsVisible(By.Id("ReportViewerControl_ctl09")));
+                js.ExecuteScript("arguments[0].scrollTop = arguments[0].scrollHeight;", divElement);
+
+                //IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                for (int i = 0; i <= 18; i++)
+                {
+                    js.ExecuteScript("arguments[0].scrollTop = arguments[0].scrollHeight / 18 * " + i + ";", divElement);
+                    Thread.Sleep(500); // Pausa por 500 milisegundos entre cada paso para un desplazamiento suave
+                }
+                Thread.Sleep(500);
                 buttonElement.Click();
-                //Thread.Sleep(8000);
                 Console.WriteLine("Click realizado en actualizar: " + DateTime.Now);
             
-                Thread.Sleep(10000);
                 //IWebElement divElement = waitrefresh.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div[id='ReportViewerControl_ctl09']")));
-                js.ExecuteScript("arguments[0].scrollIntoView();", divElement);
-                Thread.Sleep(10000);
+                //js.ExecuteScript("arguments[0].scrollIntoView();", divElement);
+                //Thread.Sleep(10000);
             }
 
         }
