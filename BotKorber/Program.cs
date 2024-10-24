@@ -4,6 +4,7 @@ using OpenQA.Selenium.Chrome;
 using System.Collections.Generic;
 using System.Threading;
 using OpenQA.Selenium.Support.UI;
+using System.IO;
 
 namespace BotKorber
 {
@@ -11,8 +12,13 @@ namespace BotKorber
     {
         static void Main(string[] args)
         {
+            string rutaCarpeta = "C:\\BotKorber";
+            if (!Directory.Exists(rutaCarpeta))
+            {
+                Directory.CreateDirectory(rutaCarpeta);
+            }
             ClassPaginaK.Test.LoginTest Test = new ClassPaginaK.Test.LoginTest();
-            Test.successLogin();
+            Test.FuncionPrincipal();
         }
     }
 }

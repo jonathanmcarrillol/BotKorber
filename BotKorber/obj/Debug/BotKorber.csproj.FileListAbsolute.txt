@@ -88,3 +88,7 @@ C:\Users\JONATHAN\Documents\GitHub\BotKorber\BotKorber\obj\Debug\BotKorber.cspro
 C:\Users\JONATHAN\Documents\GitHub\BotKorber\BotKorber\obj\Debug\BotKorber.csproj.CopyComplete
 C:\Users\JONATHAN\Documents\GitHub\BotKorber\BotKorber\obj\Debug\BotKorber.exe
 C:\Users\JONATHAN\Documents\GitHub\BotKorber\BotKorber\obj\Debug\BotKorber.pdb
+C:\Users\JONATHAN\Documents\GitHub\BotKorber\BotKorber\bin\Debug\BotKorber.exe.manifest
+C:\Users\JONATHAN\Documents\GitHub\BotKorber\BotKorber\bin\Debug\BotKorber.application
+C:\Users\JONATHAN\Documents\GitHub\BotKorber\BotKorber\obj\Debug\BotKorber.exe.manifest
+C:\Users\JONATHAN\Documents\GitHub\BotKorber\BotKorber\obj\Debug\BotKorber.application
