@@ -81,7 +81,6 @@ C:\Users\JONATHAN\Documents\GitHub\BotKorber\ClassPaginaK\bin\Debug\System.Threa
 C:\Users\JONATHAN\Documents\GitHub\BotKorber\ClassPaginaK\bin\Debug\System.ValueTuple.xml
 C:\Users\JONATHAN\Documents\GitHub\BotKorber\ClassPaginaK\bin\Debug\WebDriver.xml
 C:\Users\JONATHAN\Documents\GitHub\BotKorber\ClassPaginaK\bin\Debug\WebDriver.Support.xml
-C:\Users\JONATHAN\Documents\GitHub\BotKorber\ClassPaginaK\obj\Debug\ClassPaginaK.csproj.AssemblyReference.cache
 C:\Users\JONATHAN\Documents\GitHub\BotKorber\ClassPaginaK\obj\Debug\ClassPaginaK.csproj.CoreCompileInputs.cache
 C:\Users\JONATHAN\Documents\GitHub\BotKorber\ClassPaginaK\obj\Debug\ClassPaginaK.csproj.CopyComplete
 C:\Users\JONATHAN\Documents\GitHub\BotKorber\ClassPaginaK\obj\Debug\ClassPaginaK.dll

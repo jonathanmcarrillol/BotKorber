@@ -25,7 +25,7 @@ namespace ClassPaginaK.Test
             Thread.Sleep(3000);
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("document.body.style.zoom='80%'");
-
+            Thread.Sleep(2000);
             //IReadOnlyCollection<IWebElement> Select = driver.FindElements(By.TagName("select"));
             //List<IWebElement> listaSelect = new List<IWebElement>(Select);
 
@@ -120,8 +120,9 @@ namespace ClassPaginaK.Test
                 IWebElement dropdown = wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("span.k-dropdown-wrap.k-state-default:nth-of-type(1)")));
                 dropdown.Click();
                 Console.WriteLine("Click primer select");
-                Thread.Sleep(2000);
-                IWebElement option = wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div li[data-offset-index='13']")));
+                Thread.Sleep(2000); 
+                    IWebElement option = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//li[contains(text(),'09 Colombia')]")));
+                //IWebElement option = wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div li[data-offset-index='13']")));
                 option.Click();
                 Console.WriteLine("Click seleccionar contenido select 1");
                 Thread.Sleep(3000);
@@ -178,27 +179,29 @@ namespace ClassPaginaK.Test
 
 
             WebDriverWait waitrefresh = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            IWebElement iframeElement = waitrefresh.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("iframe[id='_divId2']")));
+            IWebElement iframeElement = waitrefresh.Until(ExpectedConditions.ElementIsVisible(By.XPath("//iframe[contains(@data-bind, \"attr: {'id': _divId2 }\")]")));
+            Thread.Sleep(3000);
             driver.SwitchTo().Frame(iframeElement);
-
-            // Esperar a que el botón dentro del iframe esté presente
+            IWebElement selectElement = waitrefresh.Until(ExpectedConditions.ElementIsVisible(By.Id("ReportViewerControl_ctl05_ctl02_ctl00")));
+            SelectElement select2 = new SelectElement(selectElement);
+            Thread.Sleep(2000);
+            select2.SelectByIndex(0);
+            
+            
             IWebElement buttonElement = waitrefresh.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div.ToolbarRefresh.WidgetSet")));
-
-            // Hacer clic en el botón
             buttonElement.Click();
+            Thread.Sleep(2000);
+            //IWebElement divElement = waitrefresh.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div[id='ReportViewerControl_ctl09']")));
+
+            //js.ExecuteScript("arguments[0].scrollTop = arguments[0].scrollHeight;", divElement);
 
 
-
-            IWebElement spanElement = waitrefresh.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div.ToolbarRefresh.WidgetSet")));
-
-            spanElement.Click();
-
-            //IWebElement iconElement = waitrefresh.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("i.icon-without-text.fa.fa-fw.fa-refresh")));
-            //iconElement.Click();
             while (true)
             {
-                spanElement.Click();
+                buttonElement.Click();
+                //Thread.Sleep(8000);
                 Console.WriteLine("Click realizado en actualizar: " + DateTime.Now);
+            
                 Thread.Sleep(10000);
             }
 
