@@ -85,3 +85,4 @@ C:\Users\JONATHAN\Documents\GitHub\BotKorber\ClassPaginaK\obj\Debug\ClassPaginaK
 C:\Users\JONATHAN\Documents\GitHub\BotKorber\ClassPaginaK\obj\Debug\ClassPaginaK.csproj.CopyComplete
 C:\Users\JONATHAN\Documents\GitHub\BotKorber\ClassPaginaK\obj\Debug\ClassPaginaK.dll
 C:\Users\JONATHAN\Documents\GitHub\BotKorber\ClassPaginaK\obj\Debug\ClassPaginaK.pdb
+C:\Users\JONATHAN\Documents\GitHub\BotKorber\ClassPaginaK\obj\Debug\ClassPaginaK.csproj.AssemblyReference.cache

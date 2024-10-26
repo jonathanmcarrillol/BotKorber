@@ -22,19 +22,20 @@ namespace ClassPaginaK.Test
                     string PrimerSelect="";
                     string SegundoSelect="";
                     string TextoModal="";
+                    string TiempoScroll = "";
 
         public void FuncionPrincipal()
         {
             if (File.Exists(rutaArchivo))
             {
                 LeerDatos();
-                successLogin(User, Password, Tiempologeando, Tiempoentreclick, PrimerSelect, SegundoSelect, TextoModal);
+                successLogin(User, Password, Tiempologeando, Tiempoentreclick, PrimerSelect, SegundoSelect, TextoModal, TiempoScroll);
             }
             else
             {
                 if(CrearArchivo()){
                 LeerDatos();
-                successLogin(User,Password,Tiempologeando,Tiempoentreclick,PrimerSelect,SegundoSelect,TextoModal);
+                successLogin(User,Password,Tiempologeando,Tiempoentreclick,PrimerSelect,SegundoSelect,TextoModal, TiempoScroll);
                 }
             }
         }
@@ -42,7 +43,7 @@ namespace ClassPaginaK.Test
 
 
         [Test]
-        public void successLogin(string User, string Password,string Tiempologeando, string Tiempoentreclick,string PrimerSelect, string SegundoSelect, string TextoModal)
+        public void successLogin(string User, string Password,string Tiempologeando, string Tiempoentreclick,string PrimerSelect, string SegundoSelect, string TextoModal, string TiempoScroll)
         {
             ChromeOptions options = new ChromeOptions();
             options.AddArgument("--start-maximized");
@@ -204,9 +205,10 @@ namespace ClassPaginaK.Test
                 js.ExecuteScript("arguments[0].scrollTop = arguments[0].scrollHeight;", divElement);
 
 
-                for (int i = 0; i <= 30; i++)
+                for (int i = 0; i <= Convert.ToInt32(TiempoScroll); i++)
                 {
-                    js.ExecuteScript("arguments[0].scrollTop = arguments[0].scrollHeight / 30 * " + i + ";", divElement);
+                    Thread.Sleep(2000);
+                    js.ExecuteScript("arguments[0].scrollTop = arguments[0].scrollHeight / "+Convert.ToInt32(TiempoScroll)+" * " + i + ";", divElement);
                     Thread.Sleep(500);
                 }
 
@@ -245,6 +247,7 @@ namespace ClassPaginaK.Test
                     writer.WriteElementString("PrimerSelect", "09 Colombia");
                     writer.WriteElementString("SegundoSelect", "OP_Yard");
                     writer.WriteElementString("TextoModal", "H1");
+                    writer.WriteElementString("TiempoScroll", "40"); 
                     writer.WriteEndElement();
 
                     writer.WriteEndElement();
@@ -258,7 +261,6 @@ namespace ClassPaginaK.Test
         public void LeerDatos()
         {
             bool Arch = File.Exists(rutaArchivo);
-            string Serial = "";
             XmlDocument doc = new XmlDocument();
             XmlNodeList Usuarios = doc.GetElementsByTagName("Usuario");
             if (Arch)
@@ -273,6 +275,7 @@ namespace ClassPaginaK.Test
                      PrimerSelect = usuario["PrimerSelect"].InnerText.ToString();
                      SegundoSelect = usuario["SegundoSelect"].InnerText.ToString();
                      TextoModal = usuario["TextoModal"].InnerText.ToString();
+                     TiempoScroll = usuario["TiempoScroll"].InnerText.ToString();
                 }
                
             }
