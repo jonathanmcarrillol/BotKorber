@@ -207,7 +207,7 @@ namespace ClassPaginaK.Test
 
                 for (int i = 0; i <= Convert.ToInt32(TiempoScroll); i++)
                 {
-                    Thread.Sleep(2000);
+                    //Thread.Sleep(1000);
                     js.ExecuteScript("arguments[0].scrollTop = arguments[0].scrollHeight / "+Convert.ToInt32(TiempoScroll)+" * " + i + ";", divElement);
                     Thread.Sleep(500);
                 }
